@@ -1,6 +1,7 @@
 cc_binary {
     name: "mtk_plpath_utils",
     srcs:  ["mtk_plpath_utils.cpp"],
+    init_rc: ["mtk_plpath_utils.rc"],
     recovery_available: true,
     static_libs: [
         "libfs_mgr"
