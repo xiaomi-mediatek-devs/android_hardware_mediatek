@@ -22,16 +22,16 @@
 using namespace std::literals::string_literals;
 using namespace android::dm;
 
-#define NAME_PL_A "pl_a"
-#define NAME_PL_B "pl_b"
+#define NAME_PL_A "preloader_a"
+#define NAME_PL_B "preloader_b"
 
 #define UFS_PL_A "/dev/block/sda"
 #define UFS_PL_B "/dev/block/sdb"
 #define UFS_DEV "/sys/class/block/sda/uevent"
-#define LINK_PL_A "/dev/block/by-name/preloader_raw_a"
-#define LINK_PL_B "/dev/block/by-name/preloader_raw_b"
-#define LINK1_PL_A "/dev/block/platform/bootdevice/by-name/preloader_raw_a"
-#define LINK1_PL_B "/dev/block/platform/bootdevice/by-name/preloader_raw_b"
+#define LINK_PL_A "/dev/block/by-name/preloader_a"
+#define LINK_PL_B "/dev/block/by-name/preloader_b"
+#define LINK1_PL_A "/dev/block/platform/bootdevice/by-name/preloader_a"
+#define LINK1_PL_B "/dev/block/platform/bootdevice/by-name/preloader_b"
 #define DM_BLK_SIZE (512)
 
 #define PLHEAD "MMM"
