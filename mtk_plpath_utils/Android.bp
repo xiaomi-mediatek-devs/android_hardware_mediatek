@@ -1,8 +1,6 @@
-cc_binary {
-    name: "mtk_plpath_utils",
-    srcs:  ["mtk_plpath_utils.cpp"],
-    init_rc: ["mtk_plpath_utils.rc"],
-    recovery_available: true,
+cc_defaults {
+    name: "mtk_plpath_utils_defaults",
+    srcs: ["mtk_plpath_utils.cpp"],
     static_libs: [
         "libfs_mgr"
     ],
@@ -10,4 +8,16 @@ cc_binary {
         "libbase",
         "liblog",
     ]
+}
+
+cc_binary {
+    name: "mtk_plpath_utils",
+    defaults: ["mtk_plpath_utils_defaults"],
+    init_rc: ["mtk_plpath_utils.rc"],
+}
+
+cc_binary {
+    name: "mtk_plpath_utils_recovery",
+    defaults: ["mtk_plpath_utils_defaults"],
+    recovery: true,
 }
