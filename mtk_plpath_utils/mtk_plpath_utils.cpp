@@ -28,10 +28,6 @@ using namespace android::dm;
 #define UFS_PL_A "/dev/block/sda"
 #define UFS_PL_B "/dev/block/sdb"
 #define UFS_DEV "/sys/class/block/sda/uevent"
-#define LINK_PL_A "/dev/block/by-name/preloader_a"
-#define LINK_PL_B "/dev/block/by-name/preloader_b"
-#define LINK1_PL_A "/dev/block/platform/bootdevice/by-name/preloader_a"
-#define LINK1_PL_B "/dev/block/platform/bootdevice/by-name/preloader_b"
 #define DM_BLK_SIZE (512)
 
 #define PLHEAD "MMM"
@@ -65,19 +61,6 @@ static int create_dm(const char* device, const char* name, std::string* path, in
   }
   ALOGI("Create %s done", (*path).c_str());
   return 0;
-}
-
-static void create_pl_link(std::string link, std::string devpath) {
-  std::string link_path;
-
-  if (android::base::Readlink(link, &link_path) && link_path != devpath) {
-    ALOGE("Remove symlink %s links to: %s", link.c_str(), link_path.c_str());
-    if (!android::base::RemoveFileIfExists(link))
-      ALOGE("Cannot remove symlink %s", strerror(errno));
-  }
-
-  if (symlink(devpath.c_str(), link.c_str()))
-    ALOGE("Failed to symlink %s to %s (%s)", devpath.c_str(), link.c_str(), strerror(errno));
 }
 
 int create_pl_path(void) {
@@ -141,12 +124,8 @@ int create_pl_path(void) {
       ALOGE("Cannot delete device %s (%s)", NAME_PL_A, strerror(errno));
     return 1;
   }
-  
 
-  create_pl_link(LINK_PL_A, path_a);
-  create_pl_link(LINK_PL_B, path_b);
-  create_pl_link(LINK1_PL_A, path_a);
-  create_pl_link(LINK1_PL_B, path_b);
+
   return 0;
 }
 
