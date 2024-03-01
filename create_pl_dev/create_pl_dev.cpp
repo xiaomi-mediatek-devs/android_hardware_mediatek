@@ -32,10 +32,10 @@ struct pl_device {
 };
 
 static struct pl_device pl_devices[] = {
-        {"preloader_a", "/dev/block/sda"},
-        {"preloader_b", "/dev/block/sdb"},
-        {"preloader_a", "/dev/block/mmcblk0boot0"},
-        {"preloader_b", "/dev/block/mmcblk0boot1"},
+        {"preloader_raw_a", "/dev/block/sda"},
+        {"preloader_raw_b", "/dev/block/sdb"},
+        {"preloader_raw_a", "/dev/block/mmcblk0boot0"},
+        {"preloader_raw_b", "/dev/block/mmcblk0boot1"},
 };
 
 static void create_dm_device(const char* name, const char* dev, int start, int count) {
