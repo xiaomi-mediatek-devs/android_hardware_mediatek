@@ -227,7 +227,16 @@ float ThermalThrottling::updatePowerBudget(
     }
 
     if (err < sensor_info.throttling_info->i_cutoff[target_state]) {
-        throttling_status.i_budget += err * sensor_info.throttling_info->k_i[target_state];
+        if (!(throttling_status.prev_power_budget <=
+                      sensor_info.throttling_info->min_alloc_power[target_state] &&
+              err < 0) &&
+            !(throttling_status.prev_power_budget >=
+                      sensor_info.throttling_info->max_alloc_power[target_state] &&
+              err > 0)) {
+            throttling_status.i_budget +=
+                    err * (err < 0 ? sensor_info.throttling_info->k_io[target_state]
+                                   : sensor_info.throttling_info->k_iu[target_state]);
+        }
     }
 
     if (fabsf(throttling_status.i_budget) > sensor_info.throttling_info->i_max[target_state]) {
@@ -259,12 +268,10 @@ float ThermalThrottling::updatePowerBudget(
     // Calculate power budget
     power_budget = sensor_info.throttling_info->s_power[target_state] + p +
                    throttling_status.i_budget + d + compensation;
-    if (power_budget < sensor_info.throttling_info->min_alloc_power[target_state]) {
-        power_budget = sensor_info.throttling_info->min_alloc_power[target_state];
-    }
-    if (power_budget > sensor_info.throttling_info->max_alloc_power[target_state]) {
-        power_budget = sensor_info.throttling_info->max_alloc_power[target_state];
-    }
+
+    power_budget =
+            std::clamp(power_budget, sensor_info.throttling_info->min_alloc_power[target_state],
+                       sensor_info.throttling_info->max_alloc_power[target_state]);
 
     if (target_changed) {
         throttling_status.budget_transient = throttling_status.prev_power_budget - power_budget;
