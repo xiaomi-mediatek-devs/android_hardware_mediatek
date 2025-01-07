@@ -1,0 +1,16 @@
+cc_binary {
+    name: "android.hardware.memtrack-service.mediatek",
+    relative_install_path: "hw",
+    init_rc: ["memtrack-mediatek.rc"],
+    vintf_fragments: ["memtrack-mediatek.xml"],
+    vendor: true,
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "android.hardware.memtrack-V1-ndk",
+    ],
+    srcs: [
+        "main.cpp",
+        "Memtrack.cpp",
+    ],
+}

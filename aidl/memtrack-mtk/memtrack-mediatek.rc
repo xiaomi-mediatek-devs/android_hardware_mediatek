@@ -1,0 +1,4 @@
+service vendor.memtrack-default /vendor/bin/hw/android.hardware.memtrack-service.mediatek
+    class hal
+    user system
+    group system
