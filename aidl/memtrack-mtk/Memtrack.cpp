@@ -41,8 +41,13 @@ bool getIonMemory(int processId, int64_t* memSize) {
 }
 
 bool getMaliGpuMemory(int processId, int64_t* memSize) {
-    FILE* memFile = fopen("/proc/mtk_mali/gpu_memory", "r");
-    if (!memFile) return false;
+    FILE* memFile = NULL;
+
+    memFile = fopen("/proc/mtk_mali/gpu_memory", "r");
+    if (!memFile) {
+        memFile = fopen("/proc/mali/memory_usage", "r");
+        if (!memFile) return false;
+    }
 
     char fileLine[1024];
     while (fgets(fileLine, sizeof(fileLine), memFile)) {
