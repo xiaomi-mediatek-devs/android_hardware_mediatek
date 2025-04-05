@@ -9,7 +9,7 @@ cc_binary {
     init_rc: ["create_pl_dev.rc"],
     recovery_available: true,
     static_libs: [
-        "libfs_mgr"
+        "libfs_mgr",
     ],
     shared_libs: [
         "libbase",

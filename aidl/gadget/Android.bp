@@ -12,8 +12,14 @@ cc_binary {
         "android.hardware.usb.gadget-service.xml",
     ],
     vendor: true,
-    srcs: ["service_gadget.cpp", "UsbGadget.cpp"],
-    cflags: ["-Wall", "-Werror"],
+    srcs: [
+        "service_gadget.cpp",
+        "UsbGadget.cpp",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
     shared_libs: [
         "libbase",
         "liblog",

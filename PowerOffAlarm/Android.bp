@@ -7,7 +7,6 @@ android_app {
     name: "PowerOffAlarm",
 
     srcs: ["java/**/*.java"],
-    resource_dirs: ["res"],
 
     system_ext_specific: true,
     certificate: "platform",
@@ -50,7 +49,7 @@ cc_library {
 prebuilt_etc {
     name: "com.qualcomm.qti.poweroffalarm_whitelist",
     system_ext_specific: true,
-    sub_dir: "sysconfig",
+    relative_install_path: "sysconfig",
     src: "com.qualcomm.qti.poweroffalarm_whitelist.xml",
     filename_from_src: true,
 }

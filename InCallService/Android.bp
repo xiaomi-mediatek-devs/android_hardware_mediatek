@@ -8,7 +8,6 @@ android_app {
     name: "MtkInCallService",
 
     srcs: ["src/**/*.java"],
-    resource_dirs: ["res"],
 
     certificate: "platform",
     platform_apis: true,
@@ -16,5 +15,5 @@ android_app {
 
     optimize: {
         enabled: false,
-    }
+    },
 }
