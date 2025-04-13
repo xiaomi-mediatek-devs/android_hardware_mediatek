@@ -8,6 +8,14 @@ hidl_package_root {
 }
 
 prebuilt_hidl_interfaces {
+    name: "hidl_vendor_mediatek_hardware_keymaster_attestation_interface",
+    interfaces: [
+        "vendor.mediatek.hardware.keymaster_attestation@1.0::IKeymasterDevice",
+        "vendor.mediatek.hardware.keymaster_attestation@1.1::IKeymasterDevice"
+    ]
+}
+
+prebuilt_hidl_interfaces {
     name: "hidl_vendor_mediatek_hardware_mmagent_interface",
     interfaces: [
         "vendor.mediatek.hardware.mmagent@1.0::IMMAgent",
