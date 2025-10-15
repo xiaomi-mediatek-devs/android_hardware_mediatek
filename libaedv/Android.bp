@@ -1,0 +1,7 @@
+cc_library_shared {
+    name: "libaedv",
+    vendor: true,
+    srcs: [
+        "aee.c",
+    ],
+}
